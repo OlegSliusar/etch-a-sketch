@@ -1,2 +1,2 @@
-# etch-a-sketch
-Javascript/jQuery first project
+# Etch-A-Sketch
+My first JavaScript/jQuery project.
