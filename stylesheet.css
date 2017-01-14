@@ -1,3 +1,28 @@
-button {
-  margin: 20px 0 10px 245px;
+h1 {
+  font-family: "Ohio Player";
+  font-size: 85px;
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+div#control {
+  padding: 0 0 10px 358px;
+}
+
+button#clear {
+   margin: -15px 0 0 0;
+   position:absolute;
+}
+button#check {
+  margin: -15px 0 10px 165px;
+  position:absolute;
+}
+button#size {
+  margin: -15px 0 10px 335px;
+  position:absolute;
+}
+button#adjust {
+  margin: -15px 0 10px 515px;
+  position:absolute;
 }

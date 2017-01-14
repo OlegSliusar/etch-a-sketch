@@ -1,6 +1,6 @@
 $(document).ready(function(){
   var squareResolution = 100;
-  var gridSize = 660;
+  var gridSize = 650;
   var generateGrid = function(res) {
     for (var i = 0; i < res; i++) {
       for (var j = 0; j < res; j++) {
@@ -45,21 +45,21 @@ $(document).ready(function(){
 
   $('button#adjust').on('click', function(){
     squareResolution = +prompt('How many squares per side the grid should have?');
-    if (squareResolution < 200) {
+    if (squareResolution <= 200 && squareResolution > 0) {
       $('div.square').remove();
       generateGrid(squareResolution);
       styleSquare();
       hoverBlack();
-    } else {
+    } else if (squareResolution > 0) {
       alert("Enter value less than 200");
+    } else {
+      alert("Enter positive value.");
     }
   });
 
   $('button#size').on('click', function(){
     gridSize = +prompt('What size should sides have?');
-    if (gridSize < 200) {
-      alert("Enter value more than 200");
-    } else {
+    if (gridSize >= 200 && gridSize <= 2000) {
       $('div.square').remove();
       generateGrid(squareResolution);
       $("div#grid").css({'width': gridSize,
@@ -69,6 +69,8 @@ $(document).ready(function(){
       });
       styleSquare();
       hoverBlack();
+    } else {
+      alert("Enter value more than 200 and less than 2000");
     }
   });
 
