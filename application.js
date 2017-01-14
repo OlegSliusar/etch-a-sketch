@@ -1,60 +1,78 @@
 $(document).ready(function(){
-  var cellResolution = 140;
-  var gridSize = 860;
-
+  var squareResolution = 100;
+  var gridSize = 660;
   var generateGrid = function(res) {
     for (var i = 0; i < res; i++) {
       for (var j = 0; j < res; j++) {
-      $("div#grid").append($('<div class="cell"></div>'));
+      $("div#grid").append($('<div class="square"></div>'));
       }
     }
-    console.log("Generated");
+    console.log("Grid generated");
+    console.log($("div.square").length + " divs are on the page");
   };
-
   var hoverBlack = function() {
-    $('div.cell').on('mouseenter', function(){
+    $('div.square').on('mouseenter', function(){
       $(this).css({'background': 'black'});
     });
     console.log("hoverBlack is working...");
   };
-
+  var styleSquare = function() {
+    $("div.square").css({'width': gridSize / squareResolution,
+            'height': gridSize / squareResolution,
+            'background': 'white',
+            'float': 'left'
+    });
+  };
   $("div#grid").css({'width': gridSize,
               'height': gridSize,
               'border': '1px solid black',
               'margin': 'auto'
   });
 
-  generateGrid(cellResolution);
+  generateGrid(squareResolution);
 
-  $("div.cell").css({'width': gridSize / cellResolution,
-            'height': gridSize / cellResolution,
-            'background': 'white',
-            'float': 'left'
-  });
+  styleSquare();
 
   hoverBlack();
 
   $('button#clear').on('click', function(){
-    $('div.cell').css('background', 'white');
+    $('div.square').css('background', 'white');
   });
 
   $('button#check').on('click', function(){
-    $('div.cell').css('background', 'black');
+    $('div.square').css('background', 'black');
   });
 
   $('button#adjust').on('click', function(){
-    cellResolution = +prompt('How many squares per side the grid should have?');
-    $('div.cell').remove();
-    generateGrid(cellResolution);
-    $("div.cell").css({'width': gridSize / cellResolution,
-            'height': gridSize / cellResolution,
-            'background': 'white',
-            'float': 'left'
-    });
-    hoverBlack();
+    squareResolution = +prompt('How many squares per side the grid should have?');
+    if (squareResolution < 200) {
+      $('div.square').remove();
+      generateGrid(squareResolution);
+      styleSquare();
+      hoverBlack();
+    } else {
+      alert("Enter value less than 200");
+    }
   });
 
-  $('div.cell').on('mouseenter', function(){
+  $('button#size').on('click', function(){
+    gridSize = +prompt('What size should sides have?');
+    if (gridSize < 200) {
+      alert("Enter value more than 200");
+    } else {
+      $('div.square').remove();
+      generateGrid(squareResolution);
+      $("div#grid").css({'width': gridSize,
+                'height': gridSize,
+                'border': '1px solid black',
+                'margin': 'auto'
+      });
+      styleSquare();
+      hoverBlack();
+    }
+  });
+
+  $('div.square').on('mouseenter', function(){
     $(this).css({'background': 'black'});
   });
 });
