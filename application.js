@@ -1,31 +1,60 @@
 $(document).ready(function(){
-  var cellNumber = 140;
+  var cellResolution = 140;
   var gridSize = 860;
+
+  var generateGrid = function(res) {
+    for (var i = 0; i < res; i++) {
+      for (var j = 0; j < res; j++) {
+      $("div#grid").append($('<div class="cell"></div>'));
+      }
+    }
+    console.log("Generated");
+  };
+
+  var hoverBlack = function() {
+    $('div.cell').on('mouseenter', function(){
+      $(this).css({'background': 'black'});
+    });
+    console.log("hoverBlack is working...");
+  };
+
   $("div#grid").css({'width': gridSize,
               'height': gridSize,
               'border': '1px solid black',
               'margin': 'auto'
-            });
-  for (var i = 0; i < cellNumber; i++) {
-    for (var j = 0; j < cellNumber; j++) {
-    $("div#grid").append($('<div class="cell"></div>'));
-    }
-  }
-  $("div.cell").css({'width': gridSize / cellNumber,
-            'height': gridSize / cellNumber,
+  });
+
+  generateGrid(cellResolution);
+
+  $("div.cell").css({'width': gridSize / cellResolution,
+            'height': gridSize / cellResolution,
             'background': 'white',
             'float': 'left'
-            });
-  $('div.cell').on('mouseenter', function(){
-    $(this).css({'background': 'black'});
   });
+
+  hoverBlack();
+
   $('button#clear').on('click', function(){
     $('div.cell').css('background', 'white');
   });
+
   $('button#check').on('click', function(){
     $('div.cell').css('background', 'black');
   });
+
   $('button#adjust').on('click', function(){
-    cellNumber = prompt('How many squares per side the grid should have?');
+    cellResolution = +prompt('How many squares per side the grid should have?');
+    $('div.cell').remove();
+    generateGrid(cellResolution);
+    $("div.cell").css({'width': gridSize / cellResolution,
+            'height': gridSize / cellResolution,
+            'background': 'white',
+            'float': 'left'
+    });
+    hoverBlack();
+  });
+
+  $('div.cell').on('mouseenter', function(){
+    $(this).css({'background': 'black'});
   });
 });
